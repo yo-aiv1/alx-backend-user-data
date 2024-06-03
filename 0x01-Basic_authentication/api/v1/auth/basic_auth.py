@@ -5,6 +5,7 @@
 
 from api.v1.auth.auth import Auth
 import base64
+from typing import Tuple, TypeVar
 
 
 class BasicAuth(Auth):
@@ -29,3 +30,15 @@ class BasicAuth(Auth):
             return base64.b64decode(Base64AuthData).decode("utf-8")
         except Exception:
             return None
+
+    def extract_user_credentials(self, Base64AuthData: str) -> Tuple[str, str]:
+        """
+        extract user credentials
+        """
+        if Base64AuthData is None or not isinstance(Base64AuthData, str):
+            return None, None
+        Data = Base64AuthData.split(":")
+        if len(Data) != 2:
+            return None, None
+
+        return tuple(Data)
