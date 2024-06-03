@@ -9,6 +9,9 @@ from api.v1.auth.auth import Auth
 class BasicAuth(Auth):
     """Basic auth class"""
     def extract_base64_authorization_header(self, AuthHeader: str) -> str:
+        """
+        Extract Base64 part of the Authorization header
+        """
         IsString = isinstance(AuthHeader, str)
         if AuthHeader is None or not IsString or AuthHeader[:6] != "Basic ":
             return None
