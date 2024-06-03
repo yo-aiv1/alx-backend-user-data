@@ -6,6 +6,7 @@
 from api.v1.auth.auth import Auth
 import base64
 from typing import Tuple, TypeVar
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -42,3 +43,26 @@ class BasicAuth(Auth):
             return None, None
 
         return tuple(Data)
+
+    def user_object_from_credentials(self, UserEmail: str,
+                                     UserPwd: str) -> TypeVar('User'):
+        """
+        get user object
+        """
+        if UserEmail is None or not isinstance(UserEmail, str):
+            return None
+        if UserPwd is None or not isinstance(UserPwd, str):
+            return None
+        try:
+            AuthUser = User.search({'email': UserEmail})
+        except Exception:
+            return None
+
+        assert not len(AuthUser) > 1
+        if len(AuthUser) == 0:
+            return None
+
+        AuthUser = AuthUser[0]
+        if not AuthUser.is_valid_password(UserPwd):
+            return None
+        return AuthUser
