@@ -27,7 +27,7 @@ def stats() -> str:
 
 
 @app_views.route('/unauthorized/', strict_slashes=False)
-def unauthorized() -> str:
+def unauthorized():
     """ GET /api/v1/unauthorized
     Return:
       - raise unauthorized
@@ -36,7 +36,7 @@ def unauthorized() -> str:
 
 
 @app_views.route('/forbidden/', strict_slashes=False)
-def forbidden() -> str:
+def forbidden():
     """ GET /api/v1/forbidden
     Return:
       - raise forbidden
