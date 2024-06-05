@@ -5,3 +5,4 @@ api/v1/views/__pycache__
 models/__pycache__
 main.py
 env.txt
+.db_User.json
