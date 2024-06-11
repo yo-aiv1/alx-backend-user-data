@@ -4,10 +4,14 @@
 User class that creates databse tables
 """
 
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String
 
 
-class User():
+Base = declarative_base()
+
+
+class User(Base):
     """
     User class
     """
